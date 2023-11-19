@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>body's solver</title>
+    <script src="https://<recaptcha>/recaptcha/enterprise.js?render=<sitekey>"></script>
+    <script
+      src="https://<turnstile>/turnstile/v0/api.js?onload=onloadTurnstileCallback&render=explicit"
+      async
+      defer
+    ></script>
+    <script
+      src="https://<subdomain>/v2/<publickey>/api.js"
+      data-callback="setupEnforcement"
+      async
+      defer
+    ></script>
+  </head>
+  <body>
+    <span>solver available at https://github.com/AkashiCoin</span>
+    <textarea id="captcha-token" disabled style="display: none"></textarea>
+    <div class="cf-turnstile" data-sitekey="<sitekey>"></div>
+    <div id="g-recaptcha"></div>
+    <div id="turnstile-container"></div>
+  </body>
+  <script>
+    window.putToken = function (token) {
+      const eleme = document.getElementById("captcha-token");
+      eleme.value = token;
+      console.log(`Challenge Success ${token}`);
+    };
+    document.addEventListener("DOMContentLoaded", (event) => {
+      const action = "<action>";
+      const sitekey = "<sitekey>";
+      if (window.grecaptcha)
+        grecaptcha.enterprise.ready(async () => {
+          const token = await grecaptcha.enterprise.execute(sitekey, {
+            action,
+          });
+          const captcha = document.getElementsByName("g-recaptcha-response")[0];
+          putToken(captcha.value);
+        });
+    });
+    window.setupEnforcement = function (myEnforcement) {
+      console.log(myEnforcement);
+      myEnforcement.setConfig({
+        onCompleted: function (response) {
+          putToken(response.token);
+        },
+        onReady: function () {
+          myEnforcement.run();
+        },
+      });
+    };
+    window.onloadTurnstileCallback = function () {
+      turnstile.render("#turnstile-container", {
+        sitekey: "<sitekey>",
+        callback: function (token) {
+          putToken(token);
+        },
+      });
+    };
+  </script>
+</html>
