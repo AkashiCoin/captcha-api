@@ -15,7 +15,7 @@ python -m playwright install
 ```
 Then, run the server:
 ```bash
-python main.py run
+python main.py
 ```
 The server will be running on port 8001 by default, you can change it in config.py.
 Also you can visit `http://127.0.0.1:8001/doc` see the doc
@@ -24,9 +24,9 @@ Also you can visit `http://127.0.0.1:8001/doc` see the doc
 
 For openai har file, you can run:  
 ```bash
-python main.py har
+python script.py har
 ```
-Then, har files will outpuy to `harPool` dir
+Then, har files will output to `harPool` dir
 
 
 ## Contributing  

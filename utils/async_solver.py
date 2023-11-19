@@ -124,7 +124,7 @@ class AsyncSolver:
         await page.goto(url)
 
         output = await self.solve_invisible(page)
-        await asyncio.sleep(100)
+        # await asyncio.sleep(100)
 
         await page.close()
         await context.close()
