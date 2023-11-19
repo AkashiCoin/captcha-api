@@ -60,7 +60,7 @@ async def _(login_id: str = Form(...), password: str = Form(...)):
     else:
         done, message = await login(
             solver,
-            "http://" + PROXIES,
+            "http://" + PROXIES if PROXIES else None,
             login_id,
             password,
         )

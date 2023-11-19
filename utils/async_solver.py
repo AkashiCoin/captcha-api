@@ -225,4 +225,4 @@ class AsyncSolver:
         self.context = await self.init_context()
 
 
-solver: AsyncSolver = AsyncSolver(f":@{PROXIES}", HEADLESS)
+solver: AsyncSolver = AsyncSolver(f":@{PROXIES}" if PROXIES else "", HEADLESS)
