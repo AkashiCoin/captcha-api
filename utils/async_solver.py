@@ -190,9 +190,12 @@ class AsyncSolver:
             user_agent=ua,
             bypass_csp=True,
             record_har_path=f"{HAR_DIR}/{filename}.har" if har else None,
-            record_har_url_filter="https://tcr9i.chat.openai.com/fc/gt2/public_key/**"
-            # record_har_content="omit",
+            record_har_url_filter="https://tcr9i.chat.openai.com/fc/gt2/public_key/**",
         )
+        await context.add_init_script(path="utils/js/preload.js")
+        await context.add_init_script(path="utils/js/canvas.js")
+        await context.add_init_script(path="utils/js/webgl.js")
+        await context.add_init_script(path="utils/js/audio.js")
         if not har:
             await context.route("**/reload?**", self.handle_captcha)
             await context.route("**/fc/gt2/public_key/*", self.handle_captcha)

@@ -18,7 +18,7 @@ Then, run the server:
 python main.py
 ```
 The server will be running on port 8001 by default, you can change it in config.py.
-Also you can visit `http://127.0.0.1:8001/doc` see the doc
+Also you can visit `http://127.0.0.1:8001/docs` see the doc
 
 ---
 
